@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Udemy Course Recommender</title>
+</head>
+<body>
+    <h1>🎯 Udemy Course Recommender</h1>
+    <form action="/search_course" method="get">
+        <label for="query">🔍 Search for a course:</label>
+        <input type="text" id="query" name="query" required>
+        <button type="submit">Search</button>
+    </form>
+    {% if courses %}
+        <h2>Search Results:</h2>
+        <ul>
+        {% for course in courses %}
+            <li>
+                <strong>{{ course['course_title'] }}</strong>
+                <form action="/recommend" method="get" style="display:inline;">
+                    <input type="hidden" name="course_index" value="{{ course['index'] }}">
+                    <button type="submit">Recommend Similar</button>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if recommendations %}
+        <h2>Recommended Courses:</h2>
+        <ul>
+        {% for course in recommendations %}
+            <li><strong>{{ course['course_title'] }}</strong></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+    
